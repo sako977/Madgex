@@ -1,3 +1,5 @@
+using System.Linq.Expressions;
+using VersionUpdater;
 using Xunit;
 
 namespace VersionUpdaterUnitTest
@@ -5,7 +7,13 @@ namespace VersionUpdaterUnitTest
    public class UnitTest1
    {
       [Fact]
-      public void Test1()
+      public void Major_Release_Test()
+      {
+
+      }
+
+      [Fact]
+      public void Minor_Release_Test()
       {
 
       }

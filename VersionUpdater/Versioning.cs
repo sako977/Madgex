@@ -14,11 +14,11 @@
       {
          string[] releaseType = version.Split('.');
 
-         if (consoleKeyInfo.Key == ConsoleKey.NumPad0)
+         if (consoleKeyInfo.Key == ConsoleKey.D1)
          {
             return Feature(releaseType);
          }
-         else if (consoleKeyInfo.Key == ConsoleKey.NumPad2)
+         else if (consoleKeyInfo.Key == ConsoleKey.D2)
          {
             return BugFix(releaseType);
          }

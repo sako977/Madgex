@@ -23,15 +23,14 @@
 
          ConsoleKeyInfo keyInfo = Console.ReadKey();
 
-         Console.WriteLine("\nEnter an absolute file path");
+         Console.WriteLine("\nEnter an absolute file path or press 'Enter' to grab version info form 'ProductInfo.cs' file.");
 
          string? softwareVersion = Console.ReadLine();
          if (string.IsNullOrWhiteSpace(softwareVersion))
          {
             Console.WriteLine("\nLooking for 'ProductInfo.cs' in current directory.");
-            softwareVersion = Path.Combine(System.IO.Directory.GetCurrentDirectory(), "ProductInfo.cs"); ;
+            softwareVersion = File.ReadAllText(Path.Combine(System.IO.Directory.GetCurrentDirectory(), "ProductInfo.cs")).TrimEnd();
          }
-
 
          Versioning versioning = new Versioning(keyInfo, softwareVersion);
          versioning.VersionIncrement();
