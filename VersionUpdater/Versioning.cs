@@ -23,7 +23,7 @@
             return BugFix(releaseType);
          }
 
-         throw new Exception("Couldn't determine release type.");
+         throw new InvalidOperationException("Couldn't determine release type.");
       }
       private string Feature(string[] major)
       {
