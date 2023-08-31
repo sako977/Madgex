@@ -11,7 +11,7 @@
          catch (Exception ex)
          {
             Console.WriteLine(ex.Message);
-            ProcessLogic(); // Exit only on success or user exit. 
+            ProcessLogic(); // Allow one more chance. 
          }
       }
 
@@ -23,17 +23,24 @@
 
          ConsoleKeyInfo keyInfo = Console.ReadKey();
 
-         Console.WriteLine("\nEnter an absolute file path or press 'Enter' to grab version info form 'ProductInfo.cs' file.");
+         Console.WriteLine("\nEnter an absolute file path or press 'Enter' to grab version info form 'ProductInfo.cs' file from current directory.");
 
-         string? softwareVersion = Console.ReadLine();
-         if (string.IsNullOrWhiteSpace(softwareVersion))
+         string softwareVersion;
+         string? filePath = Console.ReadLine();
+         if (string.IsNullOrWhiteSpace(filePath))
          {
             Console.WriteLine("\nLooking for 'ProductInfo.cs' in current directory.");
-            softwareVersion = File.ReadAllText(Path.Combine(System.IO.Directory.GetCurrentDirectory(), "ProductInfo.cs")).TrimEnd();
+            filePath = Path.Combine(System.IO.Directory.GetCurrentDirectory(), "ProductInfo.cs");
+            softwareVersion = File.ReadAllText(filePath).TrimEnd();
+         }
+         else
+         {
+            softwareVersion = File.ReadAllText(filePath).TrimEnd();
          }
 
          Versioning versioning = new Versioning(keyInfo, softwareVersion);
-         versioning.VersionIncrement();
+         softwareVersion = versioning.VersionIncrement();
+         File.WriteAllText(filePath, softwareVersion);
       }
    }
 }
