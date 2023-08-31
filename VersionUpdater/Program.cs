@@ -15,6 +15,9 @@
          }
       }
 
+      /// <summary>
+      /// ProcessLogic - Everything happens inside the method related to versioning.
+      /// </summary>
       private static void ProcessLogic()
       {
          Console.WriteLine("Select release type:\n" +
@@ -38,8 +41,11 @@
             softwareVersion = File.ReadAllText(filePath).TrimEnd();
          }
 
+         // Pass on key information and softwareversion to 'Versioning'  object
          Versioning versioning = new Versioning(keyInfo, softwareVersion);
          softwareVersion = versioning.VersionIncrement();
+
+         // Finally update the software version
          File.WriteAllText(filePath, softwareVersion);
       }
    }
